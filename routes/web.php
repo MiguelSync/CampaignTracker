@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(CampaignController::class)->prefix('campaigns')->name('campaigns.')->group(function() {
+    Route::get('/', 'index')->name('index');
 });
