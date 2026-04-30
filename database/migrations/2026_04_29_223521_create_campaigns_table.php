@@ -20,8 +20,9 @@ return new class extends Migration
             $table->smallInteger('status')->default(CampaignEnum::STATUS_PENDING);
             $table->timestamps();
 
-            DB::statement('ALTER TABLE campaigns ADD CONSTRAINT status_check CHECK ( status IN (1, 2))');
         });
+        
+        DB::statement('ALTER TABLE campaigns ADD CONSTRAINT status_check CHECK ( status IN (1, 2))');
     }
 
     /**
