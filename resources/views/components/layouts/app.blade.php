@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ptBR">
+<html lang="pt-br">
 <head>
     <title>Campaign Tracker</title>
     @livewireStyles
