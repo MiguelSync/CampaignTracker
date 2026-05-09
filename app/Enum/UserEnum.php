@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
-enum PlayerEnum
+enum UserEnum
 {
     const PLAYSTYLE_CASUAL   = 1,
           PLAYSTYLE_HARDCORE = 2;
