@@ -13,6 +13,12 @@ class UserController extends Controller
         return view('user.index');
     }
 
+    public function show(User $user) {
+        return view('user.show', [
+            'user' => $user
+        ]);
+    }
+
     public function delete(User $user, UserDelete $action) {
         $action->handle($user);
     }
