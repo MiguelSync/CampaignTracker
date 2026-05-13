@@ -3,6 +3,7 @@
 namespace App\Actions\Campaign;
 
 use App\Models\Campaign;
+use Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CampaignStoreAction
@@ -11,6 +12,6 @@ class CampaignStoreAction
 
     public function handle($input)
     {
-        Campaign::create($input);
+        Auth::user()->campaigns()->create($input);
     }
 }

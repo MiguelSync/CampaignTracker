@@ -1,6 +1,6 @@
 <div>
     <div class="w-full h-full">
-        <x-text-input class="block mt-1" type="text" name="name" />
+        <x-text-input class="block mt-1" type="text" wire:model.live.debounce.300ms="name" />
     </div>
     <div class="w-full h-full">
         <table class="table-auto border-b">
