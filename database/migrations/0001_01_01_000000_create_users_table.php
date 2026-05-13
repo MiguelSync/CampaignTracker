@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('bio', 255)->nullable();
-            $table->smallInteger('playstyle');
+            $table->smallInteger('playstyle')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
