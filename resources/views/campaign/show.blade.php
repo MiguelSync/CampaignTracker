@@ -5,18 +5,24 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="py-12 flex flex-col gap-4 justify-center">
+        <div class="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+        <div class="w-full mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:campaign-user.campaign-user-list></livewire:campaign-user.campaign-user-list>
+                <div>
+                </div>
+                <div class="w-full">
+                    <livewire:campaign-user.campaign-user-list 
+                        :campaign="$campaign" 
+                        :campaignUserStatus="$campaignUserStatus"
+                    />
                 </div>
             </div>
         </div>

@@ -17,4 +17,8 @@ class Campaign extends Model
         'started_at',
         'ended_at'
     ];
+
+    public function campaignUsers() {
+        return $this->hasMany(CampaignUser::class);
+    }
 }
