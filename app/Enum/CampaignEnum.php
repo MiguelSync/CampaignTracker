@@ -4,6 +4,15 @@ namespace App\Enum;
 
 enum CampaignEnum
 {
-    const STATUS_PENDING = 1,
-          STATUS_FINALIZED = 2;
+    const STATUS_PENDING    = 1,
+          _STATUS_PENDING   = 'Pending',
+          STATUS_FINALIZED  = 2,
+          _STATUS_FINALIZED = 'Finalized';
+
+    public static function getListRole() {
+        return [
+            ['id' => self::STATUS_PENDING , 'description' => self::_STATUS_PENDING],
+            ['id' => self::_STATUS_FINALIZED, 'description' => self::_STATUS_FINALIZED],
+        ];
+    }
 }

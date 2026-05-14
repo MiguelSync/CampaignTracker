@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Campaign;
 
 use App\Actions\Campaign\CampaignStoreAction;
+use App\Enum\CampaignEnum;
 use App\Enum\CampaignUserEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Campaign\CampaignStoreRequest;
 use App\Models\Campaign;
-use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
@@ -28,8 +28,10 @@ class CampaignController extends Controller
 
     public function show(Campaign $campaign) {
         return view('campaign.show', [
-            'campaign' => $campaign,
-            'campaignUserStatus' => CampaignUserEnum::getListaStatus()
+            'campaign'           => $campaign,
+            'campaignStatus'     => CampaignEnum::getListRole(),
+            'campaignUserStatus' => CampaignUserEnum::getListStatus(),
+            'campaignUserRole'   => CampaignUserEnum::getListRole()
         ]);
     }
 }

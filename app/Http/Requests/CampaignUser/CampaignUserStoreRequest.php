@@ -23,7 +23,9 @@ class CampaignUserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required',
+            'role'    => 'numeric',
+            'status'  => 'numeric'
         ];
     }
 }
