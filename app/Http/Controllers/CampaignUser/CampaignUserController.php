@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CampaignUser;
 
-use App\Actions\CampaignUser\CampaignUserDestroy;
-use App\Actions\CampaignUser\CampaignUserRemoveMember;
+use App\Actions\CampaignUser\CampaignUserDestroyAction;
+use App\Actions\CampaignUser\CampaignUserStoreAction;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CampaignUser\CampaignUserStoreRequest;
+use App\Models\Campaign;
 use App\Models\CampaignUser;
 
 class CampaignUserController extends Controller
 {
 
-    public function create() {
-
-    }
-
-    public function store() {
-        
+    public function store(CampaignUserStoreRequest $request, Campaign $campaign) {
+        $input = $request->validated();
+        CampaignUserStoreAction::run($input, $campaign);
+        return redirect()->route('campaign.show', [
+            'campaign' => $campaign
+        ]);
     }
 
     public function destroy(CampaignUser $campaignUser) {
-        CampaignUserDestroy::run($campaignUser);
+        CampaignUserDestroyAction::run($campaignUser);
     }
 }

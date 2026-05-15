@@ -5,8 +5,17 @@
         </div>
         <div>
             <select wire:model.live="status">
+                <option value="">All</option>
                 @foreach ($campaignUserStatus as $campaignUserStatusItem)
                     <option value="{{ $campaignUserStatusItem['id'] }}">{{ $campaignUserStatusItem['description'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <select wire:model.live="role">
+                <option value="">All</option>
+                @foreach ($campaignUserRole as $campaignUserRoleItem)
+                    <option value="{{ $campaignUserRoleItem['id'] }}">{{ $campaignUserRoleItem['description'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -25,8 +34,16 @@
                 @foreach ($campaignusers as $campaignuser)
                     <tr class="border-black border-solid border">
                         <td class="text-center"><a href="{{ route('user.show', $campaignuser->user->id) }}">{{ $campaignuser->user->name }}</a></td>
-                        <td class="text-center">{{ $campaignuser->role }}</td>
-                        <td class="text-center">{{ $campaignuser->status }}</td>
+                        @foreach ($campaignUserRole as $campaignUserRoleItem)
+                            @if($campaignUserRoleItem['id'] == $campaignuser->status)
+                                <td class="text-center">{{ $campaignUserRoleItem['description'] }}</td>
+                            @endif
+                        @endforeach
+                        @foreach ($campaignUserStatus as $campaignUserStatusItem)
+                            @if($campaignUserStatusItem['id'] == $campaignuser->role)
+                                <td class="text-center">{{ $campaignUserStatusItem['description'] }}</td>
+                            @endif
+                        @endforeach
                         <td class="text-center"><a href="{{ route('campaignuser.destroy', $campaignuser->id) }}"><x-danger-button>Remover</x-danger-button></a></td>
                     </tr>
                 @endforeach

@@ -15,13 +15,18 @@ class CampaignUserList extends Component
     public Campaign $campaign;
     public $user_name;
     public $status;
+    public $role;
 
     public array $campaignUserStatus = [];
+    public array $campaignUserRole = [];
 
-    public function mount(Campaign $campaign, array $campaignUserStatus = []) 
+    public function mount(Campaign $campaign, 
+                          array $campaignUserStatus = [],
+                          array $campaignUserRole = []) 
     {
         $this->campaign = $campaign;
         $this->campaignUserStatus = $campaignUserStatus;
+        $this->campaignUserRole = $campaignUserRole;
     }
 
     public function updatingUserName()
@@ -30,6 +35,10 @@ class CampaignUserList extends Component
     }
 
     public function updatingStatus() {
+        $this->resetPage();
+    }
+
+    public function updatingRole() {
         $this->resetPage();
     }
 
@@ -43,6 +52,9 @@ class CampaignUserList extends Component
                         })
                         ->when($this->status, function ($query) {
                             $query->where('status', '=', "$this->status");
+                        })
+                        ->when($this->role, function ($query) {
+                            $query->where('role', '=', "$this->role");
                         })
                         ->with('user')->paginate(10);
 
