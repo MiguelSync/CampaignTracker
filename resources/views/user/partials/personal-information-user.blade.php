@@ -4,7 +4,6 @@
             {{ __('Informações Pessoais') }}
         </h2>
 </div>
-
     <div>
         <x-input-label>Email</x-input-label>
         <x-text-input name="email" :value="$user->email" :disabled="true"/>
