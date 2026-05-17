@@ -1,12 +1,13 @@
 <x-app-layout>
-    <div class="w-full h-full p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-        <livewire:user.user-list></livewire:user.user-list>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Lista de Usuários
+        </h2>
+    </x-slot>
+
+    <div class="py-12 p-12">
+        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <livewire:user.user-list :userPlaystyleList="$userPlaystyleList"/>
+        </div>
     </div>
 </x-app-layout>
-
-<style>
-    main {
-        width: 100vw;
-        height: 100vh;
-    }
-</style>
