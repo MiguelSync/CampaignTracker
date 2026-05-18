@@ -34,5 +34,20 @@
             </main>
             @livewireScripts
         </div>
+
+        @if ($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    let erros = {!! json_encode($errors->all()) !!};
+                    let listaErros = erros.join('<br>');
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ops! Something went wrong...',
+                        html: listaErros,
+                    });
+                });
+            </script>
+        @endif
     </body>
 </html>
