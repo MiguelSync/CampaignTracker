@@ -44,7 +44,13 @@
                                 <td class="text-center">{{ $campaignUserStatusItem['description'] }}</td>
                             @endif
                         @endforeach
-                        <td class="text-center"><a href="{{ route('campaignuser.destroy', $campaignuser->id) }}"><x-danger-button>Remover</x-danger-button></a></td>
+                        <td class="text-center">
+                            <form action="{{ route('campaignuser.destroy', $campaignuser->id) }}", method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-danger-button type="submit">Remover</x-danger-button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

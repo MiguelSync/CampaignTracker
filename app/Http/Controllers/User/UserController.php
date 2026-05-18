@@ -29,20 +29,9 @@ class UserController extends Controller
             UserDestroyAction::run($user);
             return redirect()->route('user.index');
         } catch (Throwable $ex) {
-            return $this->handleDestroyException($ex);
+            return $this->handleExceptionBackWithErrors($ex);
         } catch (Exception $ex) {
-            return $this->handleDestroyException($ex);
+            return $this->handleExceptionBackWithErrors($ex);
         }
-    }
-
-    /**
-     * Handle any exception that occurs when executing a destroy request
-     * @param Throwable $ex
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    private function handleDestroyException(Throwable $ex) {
-        return redirect()->back()->withErrors([
-            'erro' => $ex->getMessage()                        
-        ]);
     }
 }

@@ -2,7 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
+
 abstract class Controller
 {
-    //
+    /**
+     * Handle any exception that occurs when executing a destroy request
+     * @param Throwable $ex
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected final function handleExceptionBackWithErrors(Throwable $ex) {
+        return redirect()->back()->withErrors([
+            'error' => $ex->getMessage()                        
+        ]);
+    }
 }
