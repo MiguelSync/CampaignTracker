@@ -39,7 +39,13 @@
                                 <td class="text-center border border-black-400 p-4">{{  $userPlaystyleListItem['description'] }}</td>
                             @endif
                         @endforeach
-                        <td class="text-center border border-black-400 p-4"><x-danger-button>Deletar</x-danger-button></td>
+                        <td class="text-center border border-black-400 p-4">
+                            <form action="{{ route('user.destroy', $user->id) }}", method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-danger-button type="submit">Deletar</x-danger-button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
