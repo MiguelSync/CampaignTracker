@@ -11,11 +11,13 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                        {{ __('Usuários') }}
-                    </x-nav-link>
-                </div>
+                @can('admin_user')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            {{ __('Usuários') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('campaign.index')" :active="request()->routeIs('campaign.index')">
@@ -23,11 +25,13 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
-                        {{ __('Games') }}
-                    </x-nav-link>
-                </div>
+                @can('admin_user')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
+                            {{ __('Games') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->
@@ -78,11 +82,13 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                {{ __('Usuários') }}
-            </x-responsive-nav-link>
-        </div>
+        @can('admin_user')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                    {{ __('Usuários') }}
+                </x-responsive-nav-link>
+            </div>
+        @endcan
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('campaign.index')" :active="request()->routeIs('campaign.index')">
@@ -90,11 +96,13 @@
             </x-responsive-nav-link>
         </div>
 
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
-                {{ __('Games') }}
-            </x-responsive-nav-link>
-        </div>
+        @can('admin_user')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
+                    {{ __('Games') }}
+                </x-responsive-nav-link>
+            </div>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
