@@ -33,12 +33,19 @@
                     <tr class="border border-black-400">
                         <td class="text-center border border-black-400 p-4"><a href="{{ route('user.show', $user) }}">{{  $user->name }}</a></td>
                         <td class="text-center border border-black-400 p-4">{{  $user->email }}</td>
-
-                        @foreach ($userPlaystyleList as $userPlaystyleListItem)
-                            @if ($userPlaystyleListItem['id'] == $user->playstyle)
-                                <td class="text-center border border-black-400 p-4">{{  $userPlaystyleListItem['description'] }}</td>
+                        <td class="text-center">
+                            @if (!is_null($user->playstyle))
+                                @foreach ($userPlaystyleList as $userPlaystyleListItem)
+                                    @if ($userPlaystyleListItem['id'] == $user->playstyle)
+                                        <span>
+                                            {{  $userPlaystyleListItem['description'] }}
+                                        </span>
+                                    @endif
+                                @endforeach
+                            @else
+                                <span></span>
                             @endif
-                        @endforeach
+                        </td>
                         <td class="text-center border border-black-400 p-4">
                             <form action="{{ route('user.destroy', $user->id) }}", method="POST">
                                 @csrf
