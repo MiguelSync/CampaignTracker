@@ -9,6 +9,9 @@ enum UserEnum
           PLAYSTYLE_HARDCORE  = 2,
           _PLAYSTYLE_HARDCORE = 'Hardcore';
 
+    const ADMIN_NO  = 0,
+          ADMIN_YES = 1;  
+
     public static function getListPlaystyle() {
         return [
             ['id' => self::PLAYSTYLE_CASUAL  , 'description' => self::_PLAYSTYLE_CASUAL],

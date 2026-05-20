@@ -19,14 +19,17 @@ class CampaignUserList extends Component
 
     public array $campaignUserStatus = [];
     public array $campaignUserRole = [];
+    public bool $isCampaignOwner;
 
     public function mount(Campaign $campaign, 
                           array $campaignUserStatus = [],
-                          array $campaignUserRole = []) 
+                          array $campaignUserRole = [],
+                          bool $isCampaignOwner) 
     {
         $this->campaign = $campaign;
         $this->campaignUserStatus = $campaignUserStatus;
         $this->campaignUserRole = $campaignUserRole;
+        $this->isCampaignOwner = $isCampaignOwner;
     }
 
     public function updatingUserName()

@@ -35,22 +35,25 @@
                     <tr class="border-black border-solid border">
                         <td class="text-center"><a href="{{ route('user.show', $campaignuser->user->id) }}">{{ $campaignuser->user->name }}</a></td>
                         @foreach ($campaignUserRole as $campaignUserRoleItem)
-                            @if($campaignUserRoleItem['id'] == $campaignuser->status)
+                            @if($campaignUserRoleItem['id'] == $campaignuser->role)
                                 <td class="text-center">{{ $campaignUserRoleItem['description'] }}</td>
                             @endif
                         @endforeach
                         @foreach ($campaignUserStatus as $campaignUserStatusItem)
-                            @if($campaignUserStatusItem['id'] == $campaignuser->role)
+                            @if($campaignUserStatusItem['id'] == $campaignuser->status)
                                 <td class="text-center">{{ $campaignUserStatusItem['description'] }}</td>
                             @endif
                         @endforeach
-                        <td class="text-center">
-                            <form action="{{ route('campaignuser.destroy', $campaignuser->id) }}", method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-danger-button type="submit">Remover</x-danger-button>
-                            </form>
-                        </td>
+                        
+                        @if($isCampaignOwner)
+                            <td class="text-center">
+                                <form action="{{ route('campaignuser.destroy', $campaignuser->id) }}", method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-danger-button type="submit">Remover</x-danger-button>
+                                </form>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

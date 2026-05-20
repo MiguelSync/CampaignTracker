@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Throwable;
 
 abstract class Controller
@@ -12,6 +13,7 @@ abstract class Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     protected final function handleExceptionBackWithErrors(Throwable $ex) {
+        DB::rollBack();
         return redirect()->back()->withErrors([
             'error' => $ex->getMessage()                        
         ]);

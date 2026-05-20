@@ -12,7 +12,7 @@ enum CampaignEnum
     public static function getListRole() {
         return [
             ['id' => self::STATUS_PENDING , 'description' => self::_STATUS_PENDING],
-            ['id' => self::_STATUS_FINALIZED, 'description' => self::_STATUS_FINALIZED],
+            ['id' => self::STATUS_FINALIZED, 'description' => self::_STATUS_FINALIZED],
         ];
     }
 }
