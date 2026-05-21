@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
 use App\Actions\User\UserDestroyAction;
+use App\Enum\User\UserPlaystyleEnum;
 use App\Enum\UserEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -14,7 +15,7 @@ class UserController extends Controller
 
     public function index() {
         return view('user.index', [
-            'userPlaystyleList' => UserEnum::getListPlaystyle()
+            'userPlaystyleList' => UserPlaystyleEnum::getListPlaystyle()
         ]);
     }
 
