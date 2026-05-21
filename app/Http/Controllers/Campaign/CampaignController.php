@@ -20,22 +20,23 @@ class CampaignController extends Controller
 {
 
     public function index() {
-        return view('campaign.index');
+        $campaigns = Campaign::latest()->paginate(20);
+        return view('campaign.index', compact('campaigns'));
     }
 
     public function create() {
         return view('campaign.create');
     }
 
-    public function store(CampaignStoreRequest $request){
+    public function store(CampaignStoreRequest $request) {
         try {
             DB::beginTransaction();
             $input = $request->validated();
             $campaign = CampaignStoreAction::run($input);
             CampaignUserStoreAction::run([
                 'user_id' => Auth::id(),
-                'role'   => CampaignUserEnum::ROLE_OWNER,
-                'status' => CampaignUserEnum::STATUS_ACTIVE
+                'role'    => CampaignUserEnum::ROLE_OWNER,
+                'status'  => CampaignUserEnum::STATUS_ACTIVE
             ], $campaign);
             DB::commit();
             return redirect()->route('campaign.index');
