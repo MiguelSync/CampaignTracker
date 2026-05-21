@@ -29,6 +29,12 @@
                             {{ __('Games') }}
                         </x-nav-link>
                     </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('connection.index')" :active="request()->routeIs('connection.index')">
+                            {{ __('Conexões') }}
+                        </x-nav-link>
+                    </div>
                 @endcan
             </div>
 
@@ -96,6 +102,12 @@
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('game.index')" :active="request()->routeIs('game.index')">
                     {{ __('Games') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('connection.index')" :active="request()->routeIs('connection.index')">
+                    {{ __('Conexões') }}
                 </x-responsive-nav-link>
             </div>
         @endcan
