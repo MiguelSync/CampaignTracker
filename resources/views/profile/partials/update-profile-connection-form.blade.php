@@ -9,8 +9,8 @@
             <form class="flex flex-row gap-4" method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
                 @csrf
                 @method('patch')
-                <div>
-                    <img src="{{ $userConnection->connection->url_image }}" alt="connection_img">
+                <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                    <img src="{{ $userConnection->connection->url_image }}" alt="connection_img" class="w-full h-48 object-cover rounded">
                 </div>
                 <div>
                     <x-text-input :value="old('description', $userConnection->description)"></x-text-input>
