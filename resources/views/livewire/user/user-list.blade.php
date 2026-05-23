@@ -31,7 +31,7 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr class="border border-black-400">
-                        <td class="text-center border border-black-400 p-4"><a href="{{ route('user.show', $user) }}">{{  $user->name }}</a></td>
+                        <td class="text-center border border-black-400 p-4"><a href="{{ route('profile.edit', $user) }}">{{  $user->name }}</a></td>
                         <td class="text-center border border-black-400 p-4">{{  $user->email }}</td>
                         <td class="text-center">{{ $user->playstyle?->description() }}</td>
                         <td class="text-center border border-black-400 p-4">

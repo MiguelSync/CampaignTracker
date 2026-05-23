@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enum\User\UserAdminEnum;
-use App\Enum\User\UserEnumAdmin;
 use App\Enum\User\UserPlaystyleEnum;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -38,5 +37,9 @@ class User extends Authenticatable
 
     public function campaigns() {
         return $this->hasMany(Campaign::class);
+    }
+
+    public function connections() {
+        return $this->hasMany(UserConnection::class, 'user_id');
     }
 }

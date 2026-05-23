@@ -1,3 +1,7 @@
+@php
+    $user = auth()->user();
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,6 +33,12 @@
                             {{ __('Games') }}
                         </x-nav-link>
                     </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('connection.index')" :active="request()->routeIs('connection.index')">
+                            {{ __('Conexões') }}
+                        </x-nav-link>
+                    </div>
                 @endcan
             </div>
 
@@ -48,7 +58,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit', $user)">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
@@ -98,6 +108,12 @@
                     {{ __('Games') }}
                 </x-responsive-nav-link>
             </div>
+
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('connection.index')" :active="request()->routeIs('connection.index')">
+                    {{ __('Conexões') }}
+                </x-responsive-nav-link>
+            </div>
         @endcan
 
         <!-- Responsive Settings Options -->
@@ -108,7 +124,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route('profile.edit', $user)">
                     {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
