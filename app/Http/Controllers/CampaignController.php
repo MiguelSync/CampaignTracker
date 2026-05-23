@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Campaign;
+namespace App\Http\Controllers;
 
 use App\Actions\Campaign\CampaignStoreAction;
 use App\Actions\Campaign\CampaignUpdateAction;
