@@ -10,6 +10,9 @@
                 @csrf
                 @method('patch')
                 <div>
+                    <img src="{{ $userConnection->connection->url_image }}" alt="connection_img">
+                </div>
+                <div>
                     <x-text-input :value="old('description', $userConnection->description)"></x-text-input>
                 </div>
                 <div>

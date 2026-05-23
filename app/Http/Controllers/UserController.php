@@ -19,12 +19,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user) {
-        return view('user.show', [
-            'user' => $user
-        ]);
-    }
-
     public function destroy(User $user) {
         try {
             UserDestroyAction::run($user);
