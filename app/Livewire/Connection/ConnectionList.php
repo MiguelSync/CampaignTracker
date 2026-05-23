@@ -14,7 +14,7 @@ class ConnectionList extends Component
     {
         $connections = Connection::where('title', 'ilike', "%$this->title%")->paginate(10);
 
-        return view('livewire.connection.connection-list', [
+        return view('livewire.connection.connection_list', [
             'connections' => $connections
         ]);
     }

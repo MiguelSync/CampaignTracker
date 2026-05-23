@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CampaignUser;
+namespace App\Http\Controllers;
 
 use App\Actions\CampaignUser\CampaignUserDestroyAction;
 use App\Actions\CampaignUser\CampaignUserStoreAction;

@@ -23,7 +23,13 @@ class ConnectionController extends Controller
 
     public function show(Connection $connection)
     {
-        return view('connection.show', $connection);
+        return view('connection.show', ['connection' => $connection]);
+    }
+
+    public function update(Connection $connection) {
+        return redirect()->route('connection.show', [
+            'connection' => $connection
+        ]);
     }
 
     public function destroy(Connection $connection)
