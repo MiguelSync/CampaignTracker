@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Connection\ConnectionCreateAction;
+use App\Actions\Connection\ConnectionStoreAction;
 use App\Actions\Connection\ConnectionDestroyAction;
+use App\Actions\Connection\ConnectionUpdateAction;
 use App\Http\Requests\Connection\ConnectionStoreRequest;
+use App\Http\Requests\Connection\ConnectionUpdateRequest;
 use App\Models\Connection;
 
 class ConnectionController extends Controller
@@ -17,7 +19,7 @@ class ConnectionController extends Controller
     public function store(ConnectionStoreRequest $request)
     {
         $input = $request->validated();
-        ConnectionCreateAction::run($input);
+        ConnectionStoreAction::run($input);
         return redirect()->route('connection.index');
     }
 
@@ -26,10 +28,10 @@ class ConnectionController extends Controller
         return view('connection.show', ['connection' => $connection]);
     }
 
-    public function update(Connection $connection) {
-        return redirect()->route('connection.show', [
-            'connection' => $connection
-        ]);
+    public function update(ConnectionUpdateRequest $request, Connection $connection) {
+        $input = $request->validated();
+        ConnectionUpdateAction::run($input, $connection);
+        return redirect()->route('connection.index');
     }
 
     public function destroy(Connection $connection)

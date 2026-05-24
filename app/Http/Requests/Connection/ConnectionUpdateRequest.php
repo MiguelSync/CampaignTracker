@@ -5,7 +5,7 @@ namespace App\Http\Requests\Connection;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConnectionStoreRequest extends FormRequest
+class ConnectionUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

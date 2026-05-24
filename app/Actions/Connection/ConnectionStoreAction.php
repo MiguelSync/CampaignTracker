@@ -5,12 +5,12 @@ namespace App\Actions\Connection;
 use App\Models\Connection;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class ConnectionUpdateAction
+class ConnectionStoreAction
 {
     use AsAction;
 
-    public function handle(array $input, Connection $connection)
+    public function handle(array $input)
     {
-        $connection->update($input);
+        Connection::create($input);
     }
 }

@@ -33,7 +33,7 @@
             <tbody>
                 @foreach ($campaignusers as $campaignuser)
                     <tr class="border-black border-solid border">
-                        <td class="text-center"><a href="{{ route('user.show', $campaignuser->user->id) }}">{{ $campaignuser->user->name }}</a></td>
+                        <td class="text-center"><a href="{{ route('profile.edit', $campaignuser->user) }}">{{ $campaignuser->user->name }}</a></td>
                         @foreach ($campaignUserRole as $campaignUserRoleItem)
                             @if($campaignUserRoleItem['id'] == $campaignuser->role)
                                 <td class="text-center">{{ $campaignUserRoleItem['description'] }}</td>

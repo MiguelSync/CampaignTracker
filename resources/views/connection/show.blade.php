@@ -28,7 +28,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Título</label>
                         <input type="text"
-                               name="name"
+                               name="title"
                                value="{{ $connection->title }}"
                                class="mt-1 block w-full rounded border-gray-300 shadow-sm">
                     </div>
@@ -55,7 +55,7 @@
                     @method('DELETE')
 
                     <button type="submit"
-                            onclick="return confirm('Tem certeza que deseja deletar este jogo?')"
+                            onclick="return confirm('Tem certeza que deseja deletar esta Conexão?')"
                             class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                         Deletar
                     </button>
