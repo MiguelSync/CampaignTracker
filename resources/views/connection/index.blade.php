@@ -19,7 +19,7 @@
                 </button>
             </div>
 
-            @include('connection.modals.connection_create_modal')
+            @include('connection.modal.connection_create_modal')
 
             <div class="bg-white shadow sm:rounded-lg p-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

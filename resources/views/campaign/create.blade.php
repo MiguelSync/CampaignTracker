@@ -44,6 +44,17 @@
                     <form action="{{ route('campaign.store') }}" method="post" class="px-6 py-6 space-y-5">
                         @csrf
 
+                        <div>
+                            <label for="game_id" class="block text-[12px] font-semibold uppercase tracking-wider text-[#6d6f78] mb-1.5">
+                                Jogo
+                            </label>
+                            <select name="game_id" id="game_id">
+                                @foreach ($games as $game)
+                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         {{-- Título --}}
                         <div>
                             <x-input-label for="title" class="block text-[12px] font-semibold uppercase tracking-wider text-[#6d6f78] mb-1.5">

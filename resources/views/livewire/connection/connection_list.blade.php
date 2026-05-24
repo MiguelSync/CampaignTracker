@@ -8,7 +8,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @foreach($connections as $connection)
             <a href="{{ route('connection.show', $connection->id) }}" class="border rounded-lg p-4 hover:shadow-lg transition">
-                <img src="{{ $connection->url_image }}" alt="{{ $connection->title }}" class="w-full h-48 object-cover rounded">
+                <img src="{{ $connection->url_image }}" alt="{{ $connection->title }}" class="w-full h-10 object-cover rounded">
                 <h3 class="mt-4 text-lg font-semibold text-gray-800">{{ $connection->title }}</h3>
             </a>
         @endforeach
