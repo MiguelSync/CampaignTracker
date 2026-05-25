@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\web\ConnectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/connection')->name('connection.')->group(function () {

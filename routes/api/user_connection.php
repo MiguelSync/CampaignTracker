@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserConnectionController;
+use App\Http\Controllers\api\UserConnectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/user_connection')->name('user_connection.')->group(function () {

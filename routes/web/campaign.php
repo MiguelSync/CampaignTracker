@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\web\CampaignController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->name('campaign.')->group(function() {
