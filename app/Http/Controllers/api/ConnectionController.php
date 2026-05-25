@@ -14,30 +14,31 @@ class ConnectionController extends Controller
 {
     public function index()
     {
-        return view('connection.index');
+        $connections = Connection::all();
+        return response()->json(['content' => $connections]);
     }
 
     public function store(ConnectionStoreRequest $request)
     {
         $input = $request->validated();
         ConnectionStoreAction::run($input);
-        return redirect()->route('connection.index');
+        return response()->json(['message' => 'Conexão inserida com sucesso!']);
     }
 
     public function show(Connection $connection)
     {
-        return view('connection.show', ['connection' => $connection]);
+        return response()->json(['content' => $connection]);
     }
 
     public function update(ConnectionUpdateRequest $request, Connection $connection) {
         $input = $request->validated();
         ConnectionUpdateAction::run($input, $connection);
-        return redirect()->route('connection.index');
+        return response()->json(['message' => 'Conexão alterada com sucesso!']);
     }
 
     public function destroy(Connection $connection)
     {
         ConnectionDestroyAction::run($connection);
-        return redirect()->route('connection.index');
+        return response()->json(['message' => 'Jogo removida com sucesso!']);
     }
 }

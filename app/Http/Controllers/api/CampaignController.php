@@ -22,15 +22,13 @@ class CampaignController extends Controller
 {
 
     public function index() {
-        $campaigns = Campaign::latest()->paginate(20);
-        return view('campaign.index', compact('campaigns'));
+        $campaigns = Campaign::all();
+        return response()->json(['content' => $campaigns]);
     }
 
     public function create() {
         $games = Game::all();
-        return view('campaign.create', [
-            'games' => $games
-        ]);
+        return response()->json(['message' => 'Campanha inserida com sucesso!']);
     }
 
     public function store(CampaignStoreRequest $request) {
@@ -53,15 +51,7 @@ class CampaignController extends Controller
     }
 
     public function show(Campaign $campaign) {
-        $games = Game::all();
-        
-        return view('campaign.show', [
-            'campaign'           => $campaign,
-            'campaignStatus'     => CampaignEnum::getListRole(),
-            'campaignUserStatus' => CampaignUserEnum::getListStatus(),
-            'campaignUserRole'   => CampaignUserEnum::getListRole(),
-            'games'              => $games
-        ]);
+        return response()->json(['content' => $campaign]);
     }
 
     public function update(CampaignUpdateRequest $request, Campaign $campaign) {

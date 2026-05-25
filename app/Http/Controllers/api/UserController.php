@@ -12,15 +12,14 @@ class UserController extends \App\Http\Controllers\Controller
 {
 
     public function index() {
-        return view('user.index', [
-            'userPlaystyleList' => UserPlaystyleEnum::getListPlaystyle()
-        ]);
+        $users = User::all();
+        return response()->json(['content' => $users]);
     }
 
     public function destroy(User $user) {
         try {
             UserDestroyAction::run($user);
-            return redirect()->route('user.index');
+            return response()->json(['message' => 'Usuário removido com sucesso!']);
         } catch (Throwable $ex) {
             return $this->handleExceptionBackWithErrors($ex);
         } catch (Exception $ex) {
