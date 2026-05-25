@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Actions\User\UserDestroyAction;
 use App\Enum\User\UserPlaystyleEnum;
-use App\Enum\UserEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;

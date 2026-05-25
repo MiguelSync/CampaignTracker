@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Actions\Game\GameCreateAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\GameRequest;
 use App\Models\Game;
 

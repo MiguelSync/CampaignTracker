@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Actions\UserConnection\UserConnectionDestroyAction;
 use App\Actions\UserConnection\UserConnectionStoreAction;
 use App\Actions\UserConnection\UserConnectionUpdateAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserConnection\UserConnectionStoreRequest;
 use App\Http\Requests\UserConnection\UserConnectionUpdateRequest;
 use App\Models\UserConnection;
-use Illuminate\Http\Request;
 
 class UserConnectionController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CampaignUserController;
+use App\Http\Controllers\web\CampaignUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('campaign_user')->name('campaignuser.')->group(function() {

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Actions\Connection\ConnectionStoreAction;
 use App\Actions\Connection\ConnectionDestroyAction;
 use App\Actions\Connection\ConnectionUpdateAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Connection\ConnectionStoreRequest;
 use App\Http\Requests\Connection\ConnectionUpdateRequest;
 use App\Models\Connection;
