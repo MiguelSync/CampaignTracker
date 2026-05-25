@@ -144,6 +144,17 @@
                     @method('PUT')
 
                     <div>
+                        <label for="game_id" class="block text-[12px] font-semibold uppercase tracking-wider text-[#6d6f78] mb-1.5">
+                            Jogo
+                        </label>
+                        <select name="game_id" id="game_id">
+                            @foreach ($games as $game)
+                                <option value="{{ $game->id }}" @selected($game->id == $campaign->game->id)>{{ $game->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
                         <label for="description" class="block text-[11px] font-semibold uppercase tracking-wider text-[#6d6f78] mb-1.5">Descrição</label>
                         <x-text-input id="description" name="description" :value="$campaign->description"
                             :disabled="!$isCampaignOwner"
@@ -200,7 +211,7 @@
                     @endif
                 </div>
 
-                @include('campaign.modals.campaign_user_create_modal')
+                @include('campaign.modal.campaign_user_create_modal')
 
                 <div class="px-6 py-4">
                     <livewire:campaign-user.campaign-user-list
@@ -212,8 +223,27 @@
                 </div>
             </div>
 
+            @if ($isCampaignOwner)
+                  <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                      <div class="max-w-xl">
+                          <form action="{{ route('campaign.destroy', $campaign->id) }}"
+                                method="POST">
+                              @csrf
+                              @method('DELETE')
+                            
+                              <button type="submit"
+                                      onclick="return confirm('Tem certeza que deseja deletar esta campanha?')"
+                                      class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                  Deletar
+                              </button>
+                          </form>
+                      </div>
+                  </div>
+              @endif
+
         </div>
     </div>
+
 
     {{-- Reabre o modal automaticamente se houver erros de validação --}}
     @if($errors->any())

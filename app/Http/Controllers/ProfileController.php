@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Connection;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,8 +18,11 @@ class ProfileController extends Controller
      */
     public function edit(User $user): View
     {
+        $connections = Connection::all();
+
         return view('profile.edit', [
             'user' => $user,
+            'connections' => $connections
         ]);
     }
 

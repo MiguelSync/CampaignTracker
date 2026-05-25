@@ -23,8 +23,9 @@ class CampaignStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            'game_id' => 'required|numeric',
+            'title' => 'required|string',
+            'description' => 'required|string',
             'started_at' => 'required',
         ];
     }

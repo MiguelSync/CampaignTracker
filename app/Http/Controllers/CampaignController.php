@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Campaign\CampaignDestroyAction;
 use App\Actions\Campaign\CampaignStoreAction;
 use App\Actions\Campaign\CampaignUpdateAction;
 use App\Actions\CampaignUser\CampaignUserStoreAction;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Campaign\CampaignStoreRequest;
 use App\Http\Requests\Campaign\CampaignUpdateRequest;
 use App\Models\Campaign;
+use App\Models\Game;
 use Auth;
 use DB;
 use Exception;
@@ -25,7 +27,10 @@ class CampaignController extends Controller
     }
 
     public function create() {
-        return view('campaign.create');
+        $games = Game::all();
+        return view('campaign.create', [
+            'games' => $games
+        ]);
     }
 
     public function store(CampaignStoreRequest $request) {
@@ -48,11 +53,14 @@ class CampaignController extends Controller
     }
 
     public function show(Campaign $campaign) {
+        $games = Game::all();
+        
         return view('campaign.show', [
             'campaign'           => $campaign,
             'campaignStatus'     => CampaignEnum::getListRole(),
             'campaignUserStatus' => CampaignUserEnum::getListStatus(),
-            'campaignUserRole'   => CampaignUserEnum::getListRole()
+            'campaignUserRole'   => CampaignUserEnum::getListRole(),
+            'games'              => $games
         ]);
     }
 
@@ -61,6 +69,17 @@ class CampaignController extends Controller
             $input = $request->validated();
             CampaignUpdateAction::run($input, $campaign);
             return redirect()->back();
+        } catch (Throwable $ex) {
+            return $this->handleExceptionBackWithErrors($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionBackWithErrors($ex);
+        }
+    }
+
+    public function destroy(Campaign $campaign) {
+        try {
+            CampaignDestroyAction::run($campaign);
+            return redirect()->route('campaign.index');
         } catch (Throwable $ex) {
             return $this->handleExceptionBackWithErrors($ex);
         } catch (Exception $ex) {
