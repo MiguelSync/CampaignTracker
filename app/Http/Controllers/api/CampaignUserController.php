@@ -18,18 +18,22 @@ class CampaignUserController extends Controller
         try {
             $input = $request->validated();
             CampaignUserStoreAction::run($input, $campaign);
-            return redirect()->route('campaign.show', [
-                'campaign' => $campaign
-            ]);
+            return response()->json(['message' => 'Player inserido com sucesso!', 'data' => $campaign]);
         } catch (Throwable $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         }
     }
 
     public function destroy(CampaignUser $campaignUser) {
-        CampaignUserDestroyAction::run($campaignUser);
-        return redirect()->back();
+        try {
+            CampaignUserDestroyAction::run($campaignUser);
+            return response()->json(['message' => 'Player removido com sucesso!']);
+        } catch (Throwable $ex) {
+            return $this->handleExceptionAPI($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionAPI($ex);
+        }
     }
 }

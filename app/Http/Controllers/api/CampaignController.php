@@ -26,11 +26,6 @@ class CampaignController extends Controller
         return response()->json(['content' => $campaigns]);
     }
 
-    public function create() {
-        $games = Game::all();
-        return response()->json(['message' => 'Campanha inserida com sucesso!']);
-    }
-
     public function store(CampaignStoreRequest $request) {
         try {
             DB::beginTransaction();
@@ -42,11 +37,11 @@ class CampaignController extends Controller
                 'status'  => CampaignUserEnum::STATUS_ACTIVE
             ], $campaign);
             DB::commit();
-            return redirect()->route('campaign.index');
+            return response()->json(['message' => 'Campanha inserido com sucesso!', 'data' => $campaign]);
         } catch (Throwable $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         }
     }
 
@@ -58,22 +53,22 @@ class CampaignController extends Controller
         try {
             $input = $request->validated();
             CampaignUpdateAction::run($input, $campaign);
-            return redirect()->back();
+            return response()->json(['message' => 'Campanha alterada com sucesso!', 'data' => $campaign]);
         } catch (Throwable $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         }
     }
 
     public function destroy(Campaign $campaign) {
         try {
             CampaignDestroyAction::run($campaign);
-            return redirect()->route('campaign.index');
+            return response()->json(['message' => 'Campanha removida com sucesso!']);
         } catch (Throwable $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
-            return $this->handleExceptionBackWithErrors($ex);
+            return $this->handleExceptionAPI($ex);
         }
     }
 }

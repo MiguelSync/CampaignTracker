@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Connection\ConnectionStoreRequest;
 use App\Http\Requests\Connection\ConnectionUpdateRequest;
 use App\Models\Connection;
+use Exception;
+use Throwable;
 
 class ConnectionController extends Controller
 {
@@ -20,25 +22,49 @@ class ConnectionController extends Controller
 
     public function store(ConnectionStoreRequest $request)
     {
-        $input = $request->validated();
-        ConnectionStoreAction::run($input);
-        return response()->json(['message' => 'Conexão inserida com sucesso!']);
+        try {
+            $input = $request->validated();
+            $connection = ConnectionStoreAction::run($input);
+            return response()->json(['message' => 'Conexão inserida com sucesso!', 'data' => $connection]);
+        } catch (Throwable $ex) {
+            return $this->handleExceptionAPI($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionAPI($ex);
+        }
     }
 
     public function show(Connection $connection)
     {
-        return response()->json(['content' => $connection]);
+        try {
+            return response()->json(['content' => $connection]);
+        } catch (Throwable $ex) {
+            return $this->handleExceptionAPI($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionAPI($ex);
+        }
     }
 
     public function update(ConnectionUpdateRequest $request, Connection $connection) {
-        $input = $request->validated();
-        ConnectionUpdateAction::run($input, $connection);
-        return response()->json(['message' => 'Conexão alterada com sucesso!']);
+        try {
+            $input = $request->validated();
+            ConnectionUpdateAction::run($input, $connection);
+            return response()->json(['message' => 'Conexão alterada com sucesso!', 'data' => $connection]);
+        } catch (Throwable $ex) {
+            return $this->handleExceptionAPI($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionAPI($ex);
+        }
     }
 
     public function destroy(Connection $connection)
     {
-        ConnectionDestroyAction::run($connection);
-        return response()->json(['message' => 'Jogo removida com sucesso!']);
+        try {
+            ConnectionDestroyAction::run($connection);
+            return response()->json(['message' => 'Jogo removida com sucesso!']);
+        } catch (Throwable $ex) {
+            return $this->handleExceptionAPI($ex);
+        } catch (Exception $ex) {
+            return $this->handleExceptionAPI($ex);
+        }
     }
 }

@@ -11,6 +11,6 @@ class ConnectionStoreAction
 
     public function handle(array $input)
     {
-        Connection::create($input);
+        return Connection::create($input);
     }
 }

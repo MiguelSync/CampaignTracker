@@ -18,4 +18,13 @@ abstract class Controller
             'error' => $ex->getMessage()                        
         ]);
     }
+
+    /**
+     * Handle any exception that occurs when executing a destroy request
+     * @param Throwable $ex
+     */
+    protected final function handleExceptionAPI(Throwable $ex) {
+        DB::rollBack();
+        return response()->json(['code' => $ex->getCode(), 'message' => $ex->getMessage()]);
+    }
 }

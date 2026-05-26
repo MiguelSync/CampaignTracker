@@ -11,6 +11,6 @@ class UserConnectionStoreAction
 
     public function handle(array $input)
     {
-        auth()->user()->connections()->create($input);
+        return auth()->user()->connections()->create($input);
     }
 }
