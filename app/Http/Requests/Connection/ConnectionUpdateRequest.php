@@ -23,8 +23,8 @@ class ConnectionUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'     => 'required|string',
-            'url_image' => 'required|string'
+            'title'     => 'string',
+            'url_image' => 'string'
         ];
     }
 }

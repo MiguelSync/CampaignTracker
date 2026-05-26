@@ -25,7 +25,7 @@ class ConnectionController extends Controller
         try {
             $input = $request->validated();
             $connection = ConnectionStoreAction::run($input);
-            return response()->json(['message' => 'Conexão inserida com sucesso!', 'data' => $connection]);
+            return response()->json(['message' => 'Conexão inserida com sucesso!', 'content' => $connection]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
@@ -48,7 +48,7 @@ class ConnectionController extends Controller
         try {
             $input = $request->validated();
             ConnectionUpdateAction::run($input, $connection);
-            return response()->json(['message' => 'Conexão alterada com sucesso!', 'data' => $connection]);
+            return response()->json(['message' => 'Conexão alterada com sucesso!', 'content' => $connection]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {

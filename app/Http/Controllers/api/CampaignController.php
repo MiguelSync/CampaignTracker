@@ -6,14 +6,13 @@ use App\Actions\Campaign\CampaignDestroyAction;
 use App\Actions\Campaign\CampaignStoreAction;
 use App\Actions\Campaign\CampaignUpdateAction;
 use App\Actions\CampaignUser\CampaignUserStoreAction;
-use App\Enum\CampaignEnum;
-use App\Enum\CampaignUserEnum;
+use App\Enum\CampaignUser\CampaignUserRoleEnum;
+use App\Enum\CampaignUser\CampaignUserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Campaign\CampaignStoreRequest;
 use App\Http\Requests\Campaign\CampaignUpdateRequest;
 use App\Models\Campaign;
-use App\Models\Game;
-use Auth;
+use App\Models\User;
 use DB;
 use Exception;
 use Throwable;
@@ -26,18 +25,18 @@ class CampaignController extends Controller
         return response()->json(['content' => $campaigns]);
     }
 
-    public function store(CampaignStoreRequest $request) {
+    public function store(CampaignStoreRequest $request, User $user) {
         try {
             DB::beginTransaction();
             $input = $request->validated();
-            $campaign = CampaignStoreAction::run($input);
+            $campaign = CampaignStoreAction::run($input, $user);
             CampaignUserStoreAction::run([
-                'user_id' => Auth::id(),
-                'role'    => CampaignUserEnum::ROLE_OWNER,
-                'status'  => CampaignUserEnum::STATUS_ACTIVE
+                'user_id' => $user->id,
+                'role'    => CampaignUserRoleEnum::ROLE_OWNER,
+                'status'  => CampaignUserStatusEnum::STATUS_ACTIVE
             ], $campaign);
             DB::commit();
-            return response()->json(['message' => 'Campanha inserido com sucesso!', 'data' => $campaign]);
+            return response()->json(['message' => 'Campanha inserida com sucesso!', 'content' => $campaign]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
@@ -53,7 +52,7 @@ class CampaignController extends Controller
         try {
             $input = $request->validated();
             CampaignUpdateAction::run($input, $campaign);
-            return response()->json(['message' => 'Campanha alterada com sucesso!', 'data' => $campaign]);
+            return response()->json(['message' => 'Campanha alterada com sucesso!', 'content' => $campaign]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {

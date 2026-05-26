@@ -14,11 +14,16 @@ use Throwable;
 class CampaignUserController extends Controller
 {
 
+    public function index(Campaign $campaign) {
+        $campaignUsers = CampaignUser::where('campaign_id', '=', $campaign->id)->get();
+        return response()->json(['data' => $campaignUsers]);
+    }
+
     public function store(CampaignUserStoreRequest $request, Campaign $campaign) {
         try {
             $input = $request->validated();
             CampaignUserStoreAction::run($input, $campaign);
-            return response()->json(['message' => 'Player inserido com sucesso!', 'data' => $campaign]);
+            return response()->json(['message' => 'Player inserido com sucesso!', 'content' => $campaign]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {

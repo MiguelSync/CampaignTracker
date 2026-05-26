@@ -23,7 +23,7 @@ class UserConnectionUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string'
+            'description' => 'string'
         ];
     }
 }

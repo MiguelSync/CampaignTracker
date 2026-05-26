@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enum\CampaignUser\CampaignUserRoleEnum;
+use App\Enum\CampaignUser\CampaignUserStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -13,6 +15,19 @@ class CampaignUser extends Model
         'role',
         'status'
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'role'   => CampaignUserRoleEnum::class,
+            'status' => CampaignUserStatusEnum::class
+        ];
+    }
 
     public function campaign(): BelongsTo {
         return $this->belongsTo(Campaign::class, 'campaign_id');

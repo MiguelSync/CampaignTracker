@@ -3,10 +3,10 @@
 use App\Http\Controllers\api\GameController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/game')->group(function () {
-    Route::get('/', [GameController::class, 'index']);
-    Route::post('/store', [GameController::class, 'store']);
-    Route::get('/show/{id}', [GameController::class, 'show']);
-    Route::put('/update/{id}', [GameController::class, 'update']);
-    Route::delete('/destroy/{id}', [GameController::class, 'destroy']);
+Route::prefix('/game')->name('game_api.')->group(function () {
+    Route::get('/', [GameController::class, 'index'])->name('index');
+    Route::post('/store', [GameController::class, 'store'])->name('store');
+    Route::get('/show/{id}', [GameController::class, 'show'])->name('show');
+    Route::put('/update/{id}', [GameController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [GameController::class, 'destroy'])->name('destroy');
 });

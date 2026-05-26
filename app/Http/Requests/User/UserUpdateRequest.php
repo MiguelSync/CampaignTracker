@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Campaign;
+namespace App\Http\Requests\User;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CampaignUpdateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,10 @@ class CampaignUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_id'     => 'numeric',
-            'description' => 'string',
-            'status'      => 'numeric'
+            'name'      => 'string',
+            'email'     => 'string|email',
+            'bio'       => 'string',
+            'playstyle' => 'numeric'
         ];
     }
 }

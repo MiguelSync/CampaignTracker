@@ -6,8 +6,9 @@ use App\Actions\Campaign\CampaignDestroyAction;
 use App\Actions\Campaign\CampaignStoreAction;
 use App\Actions\Campaign\CampaignUpdateAction;
 use App\Actions\CampaignUser\CampaignUserStoreAction;
-use App\Enum\CampaignEnum;
-use App\Enum\CampaignUserEnum;
+use App\Enum\Campaign\CampaignStatusEnum;
+use App\Enum\CampaignUser\CampaignUserRoleEnum;
+use App\Enum\CampaignUser\CampaignUserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Campaign\CampaignStoreRequest;
 use App\Http\Requests\Campaign\CampaignUpdateRequest;
@@ -40,8 +41,8 @@ class CampaignController extends Controller
             $campaign = CampaignStoreAction::run($input);
             CampaignUserStoreAction::run([
                 'user_id' => Auth::id(),
-                'role'    => CampaignUserEnum::ROLE_OWNER,
-                'status'  => CampaignUserEnum::STATUS_ACTIVE
+                'role'    => CampaignUserRoleEnum::ROLE_OWNER,
+                'status'  => CampaignUserStatusEnum::STATUS_ACTIVE
             ], $campaign);
             DB::commit();
             return redirect()->route('campaign.index');
@@ -57,9 +58,9 @@ class CampaignController extends Controller
         
         return view('campaign.show', [
             'campaign'           => $campaign,
-            'campaignStatus'     => CampaignEnum::getListRole(),
-            'campaignUserStatus' => CampaignUserEnum::getListStatus(),
-            'campaignUserRole'   => CampaignUserEnum::getListRole(),
+            'campaignStatus'     => CampaignStatusEnum::getListStatus(),
+            'campaignUserStatus' => CampaignUserStatusEnum::getListStatus(),
+            'campaignUserRole'   => CampaignUserRoleEnum::getListRole(),
             'games'              => $games
         ]);
     }

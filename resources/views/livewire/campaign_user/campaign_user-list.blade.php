@@ -1,10 +1,12 @@
 <div class="flex flex-col gap-4">
     <div class="flex flex-row gap-4">
         <div>
-            <x-text-input wire:model.live="user_name"></x-text-input>
+            <x-input-label>Nome:</x-input-label>
+            <x-text-input wire:model.live.debounce.300ms="userName" type="text"></x-text-input>
         </div>
         <div>
-            <select wire:model.live="status">
+            <x-input-label>Status:</x-input-label>
+            <select wire:model.live.debounce.300ms="status">
                 <option value="">All</option>
                 @foreach ($campaignUserStatus as $campaignUserStatusItem)
                     <option value="{{ $campaignUserStatusItem['id'] }}">{{ $campaignUserStatusItem['description'] }}</option>
@@ -12,7 +14,8 @@
             </select>
         </div>
         <div>
-            <select wire:model.live="role">
+            <x-input-label>Cargo:</x-input-label>
+            <select wire:model.live.debounce.300ms="role">
                 <option value="">All</option>
                 @foreach ($campaignUserRole as $campaignUserRoleItem)
                     <option value="{{ $campaignUserRoleItem['id'] }}">{{ $campaignUserRoleItem['description'] }}</option>
@@ -20,7 +23,7 @@
             </select>
         </div>
     </div>
-    <div class="class="justify-center">
+    <div class="justify-center">
         <table class="w-full border-separate border-spacing-y-4">
             <thead>
                 <tr>
@@ -31,23 +34,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($campaignusers as $campaignuser)
+                @foreach ($campaignUsers as $campaignUser)
                     <tr class="border-black border-solid border">
-                        <td class="text-center"><a href="{{ route('profile.edit', $campaignuser->user) }}">{{ $campaignuser->user->name }}</a></td>
-                        @foreach ($campaignUserRole as $campaignUserRoleItem)
-                            @if($campaignUserRoleItem['id'] == $campaignuser->role)
-                                <td class="text-center">{{ $campaignUserRoleItem['description'] }}</td>
-                            @endif
-                        @endforeach
-                        @foreach ($campaignUserStatus as $campaignUserStatusItem)
-                            @if($campaignUserStatusItem['id'] == $campaignuser->status)
-                                <td class="text-center">{{ $campaignUserStatusItem['description'] }}</td>
-                            @endif
-                        @endforeach
+                        <td class="text-center"><a href="{{ route('profile.edit', $campaignUser->user) }}">{{ $campaignUser->user->name }}</a></td>
+                        <td class="text-center">{{ $campaignUser->role->description() }}</td>
+                        <td class="text-center">{{ $campaignUser->status->description() }}</td>
                         
                         @if($isCampaignOwner)
                             <td class="text-center">
-                                <form action="{{ route('campaignuser.destroy', $campaignuser->id) }}", method="POST">
+                                <form action="{{ route('campaignuser.destroy', $campaignUser->id) }}", method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <x-danger-button type="submit">Remover</x-danger-button>
@@ -59,7 +54,6 @@
             </tbody>
         </table>
     </div>
-    <div>
-        {{ $campaignusers->links() }}
-    </div>
+
+    {{ $campaignUsers->links() }}
 </div>

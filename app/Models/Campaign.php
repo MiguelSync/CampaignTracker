@@ -17,7 +17,7 @@ class Campaign extends Model
         'status',
         'started_at',
         'ended_at',
-        'game_id'
+        'game_id',
     ];
 
     public function game(): BelongsTo {

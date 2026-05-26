@@ -8,18 +8,25 @@ use App\Actions\UserConnection\UserConnectionUpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserConnection\UserConnectionStoreRequest;
 use App\Http\Requests\UserConnection\UserConnectionUpdateRequest;
+use App\Models\User;
 use App\Models\UserConnection;
 use Exception;
 use Throwable;
 
 class UserConnectionController extends Controller
 {
+
+    public function index(User $user) {
+        $campaignUsers = UserConnection::where('user_id', '=', $user->id)->get();
+        return response()->json(['data' => $campaignUsers]);
+    }
+
     public function store(UserConnectionStoreRequest $request)
     {
         try {
             $input = $request->validated();
             $userConnection = UserConnectionStoreAction::run($input);
-            return response()->json(['message' => 'Conexão adicionada com sucesso!', 'data' => $userConnection]);
+            return response()->json(['message' => 'Conexão adicionada com sucesso!', 'content' => $userConnection]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
@@ -31,7 +38,7 @@ class UserConnectionController extends Controller
         try {
             $input = $request->validated();
             UserConnectionUpdateAction::run($input, $userConnection);
-            return response()->json(['message' => 'Conexão atualizada com sucesso!', 'data' => $userConnection]);
+            return response()->json(['message' => 'Conexão atualizada com sucesso!', 'content' => $userConnection]);
         } catch (Throwable $ex) {
             return $this->handleExceptionAPI($ex);
         } catch (Exception $ex) {
